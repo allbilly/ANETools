@@ -1,7 +1,11 @@
 CC:=clang
 CXX:=clang++
 CFLAGS:= -g -Wall -O3 -fsanitize=address
-LDFLAGS:= -g -Wall -fsanitize=address -F /System/Library/PrivateFrameworks/ -framework ANECompiler
+LDFLAGS:= -g -Wall -fsanitize=address
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Darwin)
+LDFLAGS += -F /System/Library/PrivateFrameworks/ -framework ANECompiler
+endif
 OBJS:=ANEDisassembler.o util.o wmacho.o ANETD.o
 TARGET:=ANEDisassembler
 
@@ -15,4 +19,4 @@ $(TARGET):$(OBJS)
 	$(CXX) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm $(TARGET) $(OBJS)
+	rm -f $(TARGET) $(OBJS)

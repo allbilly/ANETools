@@ -15,4 +15,7 @@ struct wmacho {
 int wmacho_open(struct wmacho *w, const char *path);
 int wmacho_get_sect_by_name(struct wmacho *w, const char *name, void **pptr, size_t *psize);
 int wmacho_close(struct wmacho *w);
+void wmacho_dump_load_commands(struct wmacho *w);
+void wmacho_dump_sections(struct wmacho *w);
+void wmacho_dump_strings(struct wmacho *w);
 #endif//WMACHO_H
